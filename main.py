@@ -5,13 +5,9 @@ from fastapi.staticfiles import StaticFiles
 
 app = FastAPI()
 
+# This finds the absolute path to your templates folder
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
-static_dir = os.path.join(BASE_DIR, "public", "static")
-if os.path.exists(static_dir):
-    app.mount("/static", StaticFiles(directory=static_dir), name='static')
-
-templates = Jinja2Templates(directory=os.path.join(BASE_DIR, 'templates'))
+templates = Jinja2Templates(directory=os.path.join(BASE_DIR, "templates"))
 
 @app.get("/")
 async def home(request: Request):
