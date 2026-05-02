@@ -1,7 +1,7 @@
 import os
 from fastapi import FastAPI, Request
 from fastapi.templating import Jinja2Templates
-from fastapi.staticfiles import StaticFiles
+from fastapi.responses import PlainTextResponse
 
 app = FastAPI()
 
@@ -28,3 +28,13 @@ def travel(request: Request):
 @app.get("/important_dates")
 async def importantdates(request: Request):
     return templates.TemplateResponse(request, 'timetable.html')
+
+@app.get("/sitemap.xml")
+async def get_sitemap(request: Request):
+    return templates.TemplateResponse(request, "sitemap.xml", media_type="application/xml")
+
+@app.get("/robots.txt", response_class=PlainTextResponse)
+async def get_robots():
+    with open("templates/robots.txt", "r") as f:
+        content = f.read()
+    return content

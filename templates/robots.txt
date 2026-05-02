@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://icetme2027.com/sitemap.xml
